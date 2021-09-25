@@ -2,22 +2,19 @@
 from typing import List
 import sys
 
+
 class Solution:
     def maxProduct(self, nums: List[int]) -> int:
-        maxProductFound = -sys.maxsize - 1
-        n = len(nums)
+        maxFound = -sys.maxsize - 1
+        for i in range(0, len(nums)):
+            curr = nums[i]
+            for j in range(i+1, len(nums)):
+                curr *= nums[j]
+                if curr > maxFound:
+                    maxFound = curr
+        return maxFound
 
-        for i in range(0,n):
-            localProduct = nums[i]
-            for j in range(0,n):
 
-                if i !=j:
-                    localProduct *= nums[j]
 
-                if localProduct > maxProductFound:
-                    maxProductFound = localProduct
-    
-        return maxProductFound
-    
-test = Solution()
-print(test.maxProduct([2,3,-2,4]))
+sol = Solution()
+print(sol.maxProduct([2, 3, -2, 4]))
